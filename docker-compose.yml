@@ -4,6 +4,6 @@ services:
     image: "d_wise"
     build: .
     volumes:
-      - "./app:/app"
+      - "./dwise:/app"
     ports:
       - "7000:80"

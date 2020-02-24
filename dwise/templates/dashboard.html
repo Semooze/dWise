@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Dashboard</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/wordcloud.js"></script>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        #dashboard {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 25% 25% 25% 25%;
+        }
+
+        #daily_message {
+            grid-column-start: 1;
+            grid-column-end: 2;
+            grid-row-start: 1;
+            grid-row-end: 5;
+        }
+
+        #top_account {
+            grid-column-start: 2;
+            grid-row-start: 1;
+        }
+
+        #top_engagement {
+            grid-column-start: 2;
+            grid-row-start: 2;
+        }
+
+        #word_cloud {
+            grid-column-start: 2;
+            grid-row-start: 3;
+        }
+
+        #hashtag_cloud {
+            grid-column-start: 2;
+            grid-row-start: 4;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="text-5xl text-center">Dash board dWise</h1>>
+    <div id="dashboard">
+        <div id="daily_message"></div>
+        <div id="top_account">
+            <table class="table-auto">
+                <h3 class="text-xl text-center">Top account</h3>
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Title</th>
+                        <th class="px-4 py-2">Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to CSS</td>
+                        <td class="border px-4 py-2">Adam</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools
+                            and the Impact on Design</td>
+                        <td class="border px-4 py-2">Adam</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="top_engagement">
+            <table class="table-auto">
+                <h3 class="text-xl text-center">Top engagement</h3>
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Title</th>
+                        <th class="px-4 py-2">Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to CSS</td>
+                        <td class="border px-4 py-2">Adam</td>
+                    </tr>
+                    <tr class="bg-gray-100">
+                        <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools
+                            and the Impact on Design</td>
+                        <td class="border px-4 py-2">Adam</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                    <tr>
+                        <td class="border px-4 py-2">Intro to JavaScript</td>
+                        <td class="border px-4 py-2">Chris</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <figure class="highcharts-figure">
+            <div id="word_cloud"></div>
+        </figure>
+        <figure class="highcharts-figure">
+            <div id="hashtag_cloud"></div>
+        </figure>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var myChart = Highcharts.chart('daily_message', {
+                credits: {
+                    enabled: false
+                },
+                chart: {
+                    type: 'bar',
+                },
+                title: {
+                    text: 'Daily Messages'
+                },
+                xAxis: {
+                    categories: {{ days | safe }}
+                },
+            series: [{
+                name: 'Number of massages',
+                data: {{ number_of_messages | safe }}
+                }]
+            });
+        });
+    </script>
+    <script>
+        var text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean bibendum erat ac justo sollicitudin, quis lacinia ligula fringilla. Pellentesque hendrerit, nisi vitae posuere condimentum, lectus urna accumsan libero, rutrum commodo mi lacus pretium erat. Phasellus pretium ultrices mi sed semper. Praesent ut tristique magna. Donec nisl tellus, sagittis ut tempus sit amet, consectetur eget erat. Sed ornare gravida lacinia. Curabitur iaculis metus purus, eget pretium est laoreet ut. Quisque tristique augue ac eros malesuada, vitae facilisis mauris sollicitudin. Mauris ac molestie nulla, vitae facilisis quam. Curabitur placerat ornare sem, in mattis purus posuere eget. Praesent non condimentum odio. Nunc aliquet, odio nec auctor congue, sapien justo dictum massa, nec fermentum massa sapien non tellus. Praesent luctus eros et nunc pretium hendrerit. In consequat et eros nec interdum. Ut neque dui, maximus id elit ac, consequat pretium tellus. Nullam vel accumsan lorem.';
+        var lines = text.split(/[,\. ]+/g),
+            data = Highcharts.reduce(lines, function (arr, word) {
+                var obj = Highcharts.find(arr, function (obj) {
+                    return obj.name === word;
+                });
+                if (obj) {
+                    obj.weight += 1;
+                } else {
+                    obj = {
+                        name: word,
+                        weight: 1
+                    };
+                    arr.push(obj);
+                }
+                return arr;
+            }, []);
+
+        Highcharts.chart('word_cloud', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                data: data,
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Word Cloud'
+            }
+        });
+    </script>
+    <script>
+        var text = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean bibendum erat ac justo sollicitudin, quis lacinia ligula fringilla. Pellentesque hendrerit, nisi vitae posuere condimentum, lectus urna accumsan libero, rutrum commodo mi lacus pretium erat. Phasellus pretium ultrices mi sed semper. Praesent ut tristique magna. Donec nisl tellus, sagittis ut tempus sit amet, consectetur eget erat. Sed ornare gravida lacinia. Curabitur iaculis metus purus, eget pretium est laoreet ut. Quisque tristique augue ac eros malesuada, vitae facilisis mauris sollicitudin. Mauris ac molestie nulla, vitae facilisis quam. Curabitur placerat ornare sem, in mattis purus posuere eget. Praesent non condimentum odio. Nunc aliquet, odio nec auctor congue, sapien justo dictum massa, nec fermentum massa sapien non tellus. Praesent luctus eros et nunc pretium hendrerit. In consequat et eros nec interdum. Ut neque dui, maximus id elit ac, consequat pretium tellus. Nullam vel accumsan lorem.';
+        var lines = text.split(/[,\. ]+/g),
+            data = Highcharts.reduce(lines, function (arr, word) {
+                var obj = Highcharts.find(arr, function (obj) {
+                    return obj.name === word;
+                });
+                if (obj) {
+                    obj.weight += 1;
+                } else {
+                    obj = {
+                        name: word,
+                        weight: 1
+                    };
+                    arr.push(obj);
+                }
+                return arr;
+            }, []);
+
+        Highcharts.chart('hashtag_cloud', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                data: data,
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Hashtag Cloud'
+            }
+        });
+    </script>
+
+</body>
+
+</html>
