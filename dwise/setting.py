@@ -1,6 +1,22 @@
 import os
-prod_file = os.environ['PROD_FILE']
-dev_file = os.environ['DEV_FILE']
-test_file = os.environ['TEST_FILE']
-# Mode can only be "test", "development" or"production"
+from dataclasses import dataclass
+
+@dataclass
+class ProdEnv:
+    data_file: str = os.environ['PROD_DATA_FILE']
+    word_file: str = os.environ['PROD_WORD_FILE']
+    hashtag_file: str = os.environ['PROD_HASHTAG_FILE']
+
+@dataclass
+class DevEnv:
+    data_file: str = os.environ['DEV_DATA_FILE']
+    word_file: str = os.environ['DEV_WORD_FILE']
+    hashtag_file: str = os.environ['DEV_HASHTAG_FILE']
+
+@dataclass
+class TestEnv:
+    data_file: str = os.environ['TEST_DATA_FILE']
+    word_file: str = os.environ['TEST_WORD_FILE']
+    hashtag_file: str = os.environ['TEST_HASHTAG_FILE']
+
 mode = os.environ['MODE']

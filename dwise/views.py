@@ -21,7 +21,7 @@ def render_daily_messages(
             "request": request,
             "days": json.dumps(days),
             "number_of_messages": json.dumps(number_of_messages),
-            "top_ten_accounts": top_ten_accounts,
+            "top_ten_accounts": list(top_ten_accounts),
             "top_ten_engagements": top_ten_engagements,
             "word_cloud": json.dumps(word_cloud),
             "hashtag_cloud": json.dumps(hashtag_cloud),

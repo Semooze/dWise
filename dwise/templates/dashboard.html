@@ -56,9 +56,6 @@
                         <th class="px-4 py-2">Twitter</th>
                         <th class="px-4 py-2">Facebook</th>
                         <th class="px-4 py-2">Pantip</th>
-                        <th class="px-4 py-2">Youtube</th>
-                        <th class="px-4 py-2">Website</th>
-                        <th class="px-4 py-2">Instagram</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +64,21 @@
                         <td class="border px-4 py-2">{{ account[0] }}</td>
                         <td class="border px-4 py-2">{{ account[1] }}</td>
                         <td class="border px-4 py-2">{{ account[2] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <table class="table-auto">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2">Youtube</th>
+                        <th class="px-4 py-2">Website</th>
+                        <th class="px-4 py-2">Instagram</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for account in top_ten_accounts %}
+                    <tr>
                         <td class="border px-4 py-2">{{ account[3] }}</td>
                         <td class="border px-4 py-2">{{ account[4] }}</td>
                         <td class="border px-4 py-2">{{ account[5] }}</td>
@@ -95,6 +107,7 @@
                     {% endfor %}
                 </tbody>
             </table>
+            
         </div>
         <figure class="highcharts-figure">
             <div id="word_cloud" class="bg-white border rounded shadow p-12 m-12"></div>
