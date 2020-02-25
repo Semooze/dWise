@@ -25,8 +25,8 @@ async def startup_event():
 async def home_page(request: Request):
     daily_data = utils.get_daily_messages(data['data'])
     days, number_of_message = utils.extract_daily_messages(daily_data)
-    accounts = utils.get_most_message_accounts(data['data'], 10)
-    top_ten_accounts = utils.extract_most_accounts(accounts)
+    accounts = utils.get_most_message_accounts(data['data'])
+    top_ten_accounts = utils.extract_most_accounts(accounts, 10)
     messages = utils.get_most_engagement_messges(data['data'], 10)
     top_ten_engagements = utils.extract_most_engagement_messages(messages)
     words = utils.extract_word_from_message(data['data'])

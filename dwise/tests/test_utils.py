@@ -42,22 +42,36 @@ def account_data():
 
 
 def test_be_able_to_find_account_who_has_most_messages(account_data):
-    accounts = get_most_message_accounts(account_data, 3)
-    assert accounts.iloc[0]['message'] == 10
-    assert accounts.iloc[0]['owner id'] == 1013618778
-    assert accounts.iloc[1]['message'] == 7
-    assert accounts.iloc[1]['owner id'] == 551094585
-    assert accounts.iloc[2]['message'] == 4
-    assert accounts.iloc[2]['owner id'] == 1669305596
-    accounts = get_most_message_accounts(account_data, 1)
-    assert accounts.message.count() == 1
+    accounts = get_most_message_accounts(account_data)
+    # import pdb; pdb.set_trace()
+    print(accounts.iloc[0]['channel'])
+    assert accounts.iloc[0]['channel'] == 'youtube'
+    assert accounts.iloc[0]['owner name'] == 'youtube_4'
+    assert accounts.iloc[1]['owner name'] == 'youtube_3'
+    assert accounts.iloc[2]['owner name'] == 'youtube_2'
+    assert accounts.iloc[3]['owner name'] == 'youtube_1'
+    assert accounts.iloc[4]['channel'] == 'website'
+    assert accounts.iloc[8]['channel'] == 'twitter'
+    assert accounts.iloc[12]['channel'] == 'pantip'
+    assert accounts.iloc[16]['channel'] == 'instagram'
+
+#TODO
+# def test_be_able_to_find_account_who_has_most_messages_when_some_row_contain_empty_message(message_missing_data):
+#     daily_message = get_daily_messages(message_missing_data)
+#     assert daily_message['message'].loc['2019-01-01'] == 4
+#     assert daily_message['message'].loc['2019-01-03'] == 2
+#'twitter', 'facebook', 'pantip', 'youtube', 'website', 'instagram'
 
 
 def test_convert_account_format(account_data):
-    accounts = get_most_message_accounts(account_data, 3)
-    actual = extract_most_accounts(accounts)
-    expect = [(1013618778, '💖', 10), (551094585, 'ning$ing$nng$nig$nin', 7), (1669305596, 'psm', 4)]
-    assert actual == expect
+    accounts = get_most_message_accounts(account_data)
+    actual = extract_most_accounts(accounts, 3)
+    expect = [
+        ('youtube_4', 'web_site_4', 'twitter_4','pantip_4', 'instagram_4', 'facebook_4'),
+        ('youtube_3', 'web_site_3', 'twitter_3','pantip_3', 'instagram_3', 'facebook_3'),
+        ('youtube_2', 'web_site_2', 'twitter_2','pantip_2', 'instagram_2', 'facebook_2')
+    ]
+    assert list(actual) == expect
 
 
 @pytest.fixture
@@ -89,6 +103,7 @@ def test_be_able_to_find_message_which_has_most_engagement(engagement_data):
     assert messages.iloc[0]['engagement'] == 9053
     assert messages.iloc[1]['engagement'] == 8170
     assert messages.iloc[2]['engagement'] == 8102
+    #'twitter', 'facebook', 'pantip', 'youtube', 'website', 'instagram'
 
 
 def test_convert_message_by_engagement_format(engagement_data):
@@ -106,7 +121,7 @@ def word_test_data():
     data = pd.read_csv('tests/test_data/word_test.csv')
     return data
 
-    #TODO Due to unstable of cutting word library there is no proper way to test it right now.
+    # TODO Due to unstable of cutting word library there is no proper way to test it right now.
     # def test_be_able_to_cut_word_from_message(word_test_data):
     #     actual = extract_word_from_message(word_test_data)
     #     expect = [
@@ -177,4 +192,3 @@ def test_be_able_to_filter_sign_hash_out():
         '#ทดสอบ','#ทดสอบ','#ทดสอบ','#ทดสอบ','#test', '#', 'Be_e']
     )
     assert actual == {'#test': 2, '#ทดสอบ': 7, '#12354': 1}
-

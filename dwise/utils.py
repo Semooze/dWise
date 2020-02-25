@@ -9,12 +9,25 @@ def get_daily_messages(data):
 def extract_daily_messages(data):
     return data.index.strftime('%Y/%m/%d').to_list(), data['message'].to_list()
 
-def get_most_message_accounts(data, number_of_user):
-    result = data.groupby(['owner id', 'owner name'], as_index=False).count().sort_values('message', ascending=False)
-    return result.head(number_of_user)
+def get_most_message_accounts(data):
+    return data.groupby(['channel', 'owner id', 'owner name'], as_index=False).count().sort_values(['channel', 'message'], ascending=False)
 
-def extract_most_accounts(data):
-    return [ tuple(x) for x in data[['owner id', 'owner name', 'message']].to_numpy()]
+def extract_most_accounts(data, number_of_user=None):
+    if number_of_user is None:
+        youtubes = data.where(data["channel"] == "youtube").dropna()['owner name'].to_list()
+        websites = data.where(data["channel"] == "website").dropna()['owner name'].to_list()
+        twitters = data.where(data["channel"] == "twitter").dropna()['owner name'].to_list()
+        pantips = data.where(data["channel"] == "pantip").dropna()['owner name'].to_list()
+        instagrams = data.where(data["channel"] == "instagram").dropna()['owner name'].to_list()
+        facebooks = data.where(data["channel"] == "facebook").dropna()['owner name'].to_list()
+    else:
+        youtubes = data.where(data["channel"] == "youtube").dropna()['owner name'].head(number_of_user).to_list()
+        websites = data.where(data["channel"] == "website").dropna()['owner name'].head(number_of_user).to_list()
+        twitters = data.where(data["channel"] == "twitter").dropna()['owner name'].head(number_of_user).to_list()
+        pantips = data.where(data["channel"] == "pantip").dropna()['owner name'].head(number_of_user).to_list()
+        instagrams = data.where(data["channel"] == "instagram").dropna()['owner name'].head(number_of_user).to_list()
+        facebooks = data.where(data["channel"] == "facebook").dropna()['owner name'].head(number_of_user).to_list()
+    return zip(youtubes, websites, twitters, pantips, instagrams, facebooks)
 
 def get_most_engagement_messges(data, number_of_message):
     return data.sort_values('engagement', ascending=False).head(number_of_message)

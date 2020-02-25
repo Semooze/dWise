@@ -23,11 +23,15 @@
         #top_account {
             grid-column-start: 2;
             grid-row-start: 1;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #top_engagement {
             grid-column-start: 2;
             grid-row-start: 2;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #word_cloud {
@@ -47,19 +51,27 @@
     <div id="dashboard">
         <div id="daily_message"></div>
         <div id="top_account">
-            <table class="table-fixed">
+            <table class="table-auto">
                 <h3 class="text-xl text-center">Top account</h3>
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">User Name</th>
-                        <th class="px-4 py-2">Count</th>
+                        <th class="px-4 py-2">Twitter</th>
+                        <th class="px-4 py-2">Facebook</th>
+                        <th class="px-4 py-2">Pantip</th>
+                        <th class="px-4 py-2">Youtube</th>
+                        <th class="px-4 py-2">Website</th>
+                        <th class="px-4 py-2">Instagram</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for account in top_ten_accounts %}
                     <tr>
+                        <td class="border px-4 py-2">{{ account[0] }}</td>
                         <td class="border px-4 py-2">{{ account[1] }}</td>
                         <td class="border px-4 py-2">{{ account[2] }}</td>
+                        <td class="border px-4 py-2">{{ account[3] }}</td>
+                        <td class="border px-4 py-2">{{ account[4] }}</td>
+                        <td class="border px-4 py-2">{{ account[5] }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
