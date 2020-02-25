@@ -9,8 +9,6 @@ uvicorn = "*"
 pandas = "*"
 "jinja2" = "*"
 pythainlp = "*"
-attacut = "*"
-deepcut = "*"
 aiofile = "*"
 
 [dev-packages]
