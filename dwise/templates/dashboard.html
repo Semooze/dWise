@@ -47,56 +47,21 @@
     <div id="dashboard">
         <div id="daily_message"></div>
         <div id="top_account">
-            <table class="table-auto">
+            <table class="table-fixed">
                 <h3 class="text-xl text-center">Top account</h3>
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">Title</th>
-                        <th class="px-4 py-2">Author</th>
+                        <th class="px-4 py-2">User Name</th>
+                        <th class="px-4 py-2">Count</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for account in top_ten_accounts %}
                     <tr>
-                        <td class="border px-4 py-2">Intro to CSS</td>
-                        <td class="border px-4 py-2">Adam</td>
+                        <td class="border px-4 py-2">{{ account[1] }}</td>
+                        <td class="border px-4 py-2">{{ account[2] }}</td>
                     </tr>
-                    <tr class="bg-gray-100">
-                        <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools
-                            and the Impact on Design</td>
-                        <td class="border px-4 py-2">Adam</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -105,52 +70,17 @@
                 <h3 class="text-xl text-center">Top engagement</h3>
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">Title</th>
-                        <th class="px-4 py-2">Author</th>
+                        <th class="px-4 py-2">Message</th>
+                        <th class="px-4 py-2">Engagement</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for messages in top_ten_engagements %}
                     <tr>
-                        <td class="border px-4 py-2">Intro to CSS</td>
-                        <td class="border px-4 py-2">Adam</td>
+                        <td class="border px-4 py-2">{{ messages[0] }}</td>
+                        <td class="border px-4 py-2">{{ messages[1] }}</td>
                     </tr>
-                    <tr class="bg-gray-100">
-                        <td class="border px-4 py-2">A Long and Winding Tour of the History of UI Frameworks and Tools
-                            and the Impact on Design</td>
-                        <td class="border px-4 py-2">Adam</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Intro to JavaScript</td>
-                        <td class="border px-4 py-2">Chris</td>
-                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

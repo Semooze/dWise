@@ -11,6 +11,7 @@ pandas = "*"
 pythainlp = "*"
 attacut = "*"
 deepcut = "*"
+aiofile = "*"
 
 [dev-packages]
 mypy = "*"

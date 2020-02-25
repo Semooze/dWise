@@ -1,8 +1,10 @@
 import pandas as pd
 from fastapi import FastAPI
+from starlette.requests import Request
 from starlette.responses import HTMLResponse
-from utils import extract_daily_messages, get_daily_messages
-from views import render_daily_messages
+
+from dwise import utils
+from dwise.views import render_daily_messages
 
 app = FastAPI()
 
@@ -10,10 +12,14 @@ data = dict()
 
 @app.on_event('startup')
 async def startup_event():
-    data['data'] = pd.read_csv('data/mini.csv', index_col='id')
+    data['data'] = pd.read_csv('data/mini.csv', sep=',', doublequote=True)
 
 @app.get('/')
-async def read_root():
-    daily_data = get_daily_messages(data['data'])
-    days, number_of_message = extract_daily_messages(daily_data)
-    return HTMLResponse(render_daily_messages(days, number_of_message))
+async def home_page(request: Request):
+    daily_data = utils.get_daily_messages(data['data'])
+    days, number_of_message = utils.extract_daily_messages(daily_data)
+    accounts = utils.get_most_message_accounts(data['data'], 10)
+    top_ten_accounts = utils.extract_most_accounts(accounts)
+    messages = utils.get_most_engagement_messges(data['data'], 10)
+    top_ten_engagements = utils.extract_most_engagement_messages(messages)
+    return render_daily_messages(request, days, number_of_message, top_ten_accounts, top_ten_engagements)
