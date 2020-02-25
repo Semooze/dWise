@@ -101,19 +101,80 @@ def test_convert_message_by_engagement_format(engagement_data):
     ]
 
 
-# @pytest.fixture
-# def word_test_data():
-#     data = pd.read_csv('test/test_data/word_test.csv')
-#     return data
+@pytest.fixture
+def word_test_data():
+    data = pd.read_csv('tests/test_data/word_test.csv')
+    return data
+
+    #TODO Due to unstable of cutting word library there is no proper way to test it right now.
+    # def test_be_able_to_cut_word_from_message(word_test_data):
+    #     actual = extract_word_from_message(word_test_data)
+    #     expect = [
+    #         '101','.', 'ชีวิต','ไม่','ง่ายดาย','ชีวิต','ช่าง','วุ่นวาย','เก๊ง','เก๊ง เก๊ง เก๊ง เที่ยง',
+    #         'คืน','แล้ว','จ้า','Sometimes','People','ask','what','keeps',
+    #         'me','Going','And','in','truth','it','comes','from','Knowing','I',
+    #         'have','you','To','save','my','day',
+    #     ]
+    #     assert actual == expect
+    #     assert True == True
 
 
-# def test_be_able_to_cut_word_from_message(word_test_data):
-#     actual = extract_word_from_message(word_test_data)
-#     expect = [
-#         '101','.', 'ชีวิต','ไม่','ง่ายดาย','ชีวิต','ช่าง','วุ่นวาย','เก๊ง','เก๊ง เก๊ง เก๊ง เที่ยง',
-#         'คืน','แล้ว','จ้า','Sometimes','People','ask','what','keeps',
-#         'me','Going','And','in','truth','it','comes','from','Knowing','I',
-#         'have','you','To','save','my','day',
-#     ]
-#     assert actual == expect
+def test_be_able_to_make_word_count():
+    actual = make_word_count(
+        ['test', 'test', 'me', 'ทดสอบ', '12354', '12', '9', '9', 'ทดสอบ', 'test']
+    )
+    assert actual == {'test': 3, 'ทดสอบ': 2, 'me': 1, '12354': 1, '12': 1, '9': 2}
+
+
+def test_be_able_to_produce_highland_format_for_word_cloud():
+    actual = make_word_cloud({'test': 3, 'ทดสอบ': 2, 'me': 1, '12354': 1, '12': 1, '9': 2})
+    assert actual == [
+        {'name': 'test', 'weight': 3},
+        {'name': 'ทดสอบ', 'weight': 2},
+        {'name': 'me', 'weight': 1},
+        {'name': '12354', 'weight': 1},
+        {'name': '12', 'weight': 1},
+        {'name': '9', 'weight': 2},
+    ]
+
+def test_be_able_to_sort_and_limit_word_clound():
+    actual = make_word_cloud({'me': 1, 'ทดสอบ': 2, '12354': 1, 'test': 3, '12': 1, '9': 2}, sort='decend')
+    assert actual == [
+        {'name': 'test', 'weight': 3},
+        {'name': 'ทดสอบ', 'weight': 2},
+        {'name': '9', 'weight': 2},
+        {'name': 'me', 'weight': 1},
+        {'name': '12354', 'weight': 1},
+        {'name': '12', 'weight': 1}
+    ]
+    actual = make_word_cloud({'me': 1, 'ทดสอบ': 2, '12354': 1, 'test': 3, '12': 1, '9': 2}, sort='ascend')
+    assert actual == [
+        {'name': 'me', 'weight': 1},
+        {'name': '12354', 'weight': 1},
+        {'name': '12', 'weight': 1},
+        {'name': 'ทดสอบ', 'weight': 2},
+        {'name': '9', 'weight': 2},
+        {'name': 'test', 'weight': 3}
+    ]
+    actual = make_word_cloud({'me': 1, 'ทดสอบ': 2, '12354': 1, 'test': 3, '12': 1, '9': 2}, sort='ascend', limit=2)
+    assert actual == [
+        {'name': 'me', 'weight': 1},
+        {'name': '12354', 'weight': 1}
+    ]
+
+def test_be_able_to_make_hashtag_count():
+    actual = make_hashtag_count(
+        ['#test', 'test', 'me', 'ทดสอบ', '#12354', '12', '9',
+        '9', '#ทดสอบ', 'test', '#ทดสอบ', '#ทดสอบ', 'Big data', 'hashtag',
+        '#ทดสอบ','#ทดสอบ','#ทดสอบ','#ทดสอบ','#test', 'Be_e']
+    )
+    assert actual == {'#test': 2, '#ทดสอบ': 7, '#12354': 1}
+
+def test_be_able_to_filter_sign_hash_out():
+    actual = make_hashtag_count(
+        ['#test', '#', 'test', 'me', 'ทดสอบ', '#12354', '12', '9',
+        '9', '#ทดสอบ', 'test', '#ทดสอบ', '#ทดสอบ', 'Big data', 'hashtag',
+        '#ทดสอบ','#ทดสอบ','#ทดสอบ','#ทดสอบ','#test', '#', 'Be_e']
+    )
+    assert actual == {'#test': 2, '#ทดสอบ': 7, '#12354': 1}
 

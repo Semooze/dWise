@@ -5,14 +5,21 @@ from starlette.responses import HTMLResponse
 
 from dwise import utils
 from dwise.views import render_daily_messages
-
+from dwise import setting
 app = FastAPI()
 
 data = dict()
 
 @app.on_event('startup')
 async def startup_event():
-    data['data'] = pd.read_csv('data/mini.csv', sep=',', doublequote=True)
+    file_path = None
+    if setting.mode == 'production':
+        file_path = setting.prod_file
+    elif setting.mode == 'development':
+        file_path = setting.dev_file
+    else:
+        file_path = setting.test_file
+    data['data'] = pd.read_csv(file_path, sep=',', doublequote=True)
 
 @app.get('/')
 async def home_page(request: Request):
@@ -22,4 +29,9 @@ async def home_page(request: Request):
     top_ten_accounts = utils.extract_most_accounts(accounts)
     messages = utils.get_most_engagement_messges(data['data'], 10)
     top_ten_engagements = utils.extract_most_engagement_messages(messages)
-    return render_daily_messages(request, days, number_of_message, top_ten_accounts, top_ten_engagements)
+    words = utils.extract_word_from_message(data['data'])
+    word_count = utils.make_word_count(words)
+    word_cloud = utils.make_word_cloud(word_count, sort='decend', limit=100)
+    hashtag_count = utils.make_hashtag_count(words)
+    hashtag_cloud = utils.make_word_cloud(hashtag_count, sort='decend', limit=100)
+    return render_daily_messages(request, days, number_of_message, top_ten_accounts, top_ten_engagements, word_cloud, hashtag_cloud)
