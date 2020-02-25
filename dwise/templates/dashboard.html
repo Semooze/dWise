@@ -23,15 +23,11 @@
         #top_account {
             grid-column-start: 2;
             grid-row-start: 1;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         #top_engagement {
             grid-column-start: 2;
             grid-row-start: 2;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         #word_cloud {
@@ -47,12 +43,14 @@
 </head>
 
 <body>
-    <h1 class="text-5xl text-center">Dash board dWise</h1>>
+    <h1 class="text-5xl text-center">dWise Dash board</h1>>
     <div id="dashboard">
-        <div id="daily_message"></div>
-        <div id="top_account">
+        <div id="daily_message" class="bg-white border rounded shadow p-12 m-12"></div>
+        <div id="top_account" class="bg-white border rounded shadow p-12 m-12">
+            <div class="border-b p-3">
+                <h5 class="uppercase text-grey-dark">Top account</h5>
+            </div>
             <table class="table-auto">
-                <h3 class="text-xl text-center">Top account</h3>
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Twitter</th>
@@ -77,9 +75,11 @@
                 </tbody>
             </table>
         </div>
-        <div id="top_engagement">
-            <table class="table-auto">
-                <h3 class="text-xl text-center">Top engagement</h3>
+        <div id="top_engagement" class="bg-white border rounded shadow p-12 m-12">
+            <div class="border-b p-3">
+                <h5 class="uppercase text-grey-dark">Top engagement</h5>
+            </div>
+            <table class="table-auto w-full p-5 text-grey-darker">
                 <thead>
                     <tr>
                         <th class="px-4 py-2">Message</th>
@@ -97,10 +97,10 @@
             </table>
         </div>
         <figure class="highcharts-figure">
-            <div id="word_cloud"></div>
+            <div id="word_cloud" class="bg-white border rounded shadow p-12 m-12"></div>
         </figure>
         <figure class="highcharts-figure">
-            <div id="hashtag_cloud"></div>
+            <div id="hashtag_cloud" class="bg-white border rounded shadow p-12 m-12"></div>
         </figure>
     </div>
     <script>
@@ -113,7 +113,8 @@
                     type: 'bar',
                 },
                 title: {
-                    text: 'Daily Messages'
+                    text: 'DAILY MESSAGES',
+                    align: 'left'
                 },
                 xAxis: {
                     categories: {{ days | safe }}
@@ -141,7 +142,8 @@
                 name: 'Occurrences'
             }],
             title: {
-                text: 'Word Cloud'
+                text: 'WORD CLOUD',
+                align: 'left'
             }
         });
     </script>
@@ -161,7 +163,8 @@
                 name: 'Occurrences'
             }],
             title: {
-                text: 'Hashtag Cloud'
+                text: 'HASHTAG CLOUD',
+                align: 'left'
             }
         });
     </script>
