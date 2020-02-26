@@ -4,7 +4,7 @@ services:
     image: "d_wise"
     build: .
     ports:
-      - "7000:80"
+      - "8000:8000"
     environment:
       PROD_DATA_FILE: ./data/cleaned_data.csv
       PROD_WORD_FILE: ./data/word_list
@@ -16,3 +16,4 @@ services:
       TEST_WORD_FILE: ./tests/test_data/test_word_list
       TEST_HASHTAG_FILE: ./tests/test_data/test_hashtag_list
       MODE: production
+      PYTHONPATH: /opt

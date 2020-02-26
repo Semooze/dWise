@@ -1,9 +1,9 @@
-FROM tiangolo/uvicorn-gunicorn-fastapi:python3.7
+FROM python:3.7
 
 COPY requirements /opt/requirements
 RUN pip install -r /opt/requirements
 
-COPY ./ /app
-RUN cd /app/dwise
+COPY ./ /opt
+WORKDIR /opt/dwise
 
-WORKDIR /app/dwise
+CMD ["uvicorn","main:app","--host","0.0.0.0", "--reload"]

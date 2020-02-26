@@ -6,6 +6,10 @@ An web application for showing dashboard. project board [here](https://github.co
 * [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 * [docker-compose](https://docs.docker.com/compose/install/)
 
+## Caution
+
+__Don't use computer that have memory less than 8GB.__ 
+
 ### How to use
 1. Clone this repository
 2. Download data from [here](https://drive.google.com/drive/folders/17zfmjp-kTIVjiXoXdt_YGoLAAVG3wjYU?usp=sharing)
