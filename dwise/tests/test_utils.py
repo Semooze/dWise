@@ -21,10 +21,8 @@ def test_be_able_to_group_data_by_day_with_filter_message(sample_data):
     assert daily_message['message'].loc['2019-01-03'] == 1
     daily_message = get_daily_messages(sample_data, message='Happy')
     assert daily_message['message'].loc['2019-01-01'] == 4
-
-def test_return_none_when_there_is_no_matched_message(sample_data):
-    actual = get_daily_messages(sample_data, message='happy')
-    assert actual is None
+    daily_message = get_daily_messages(sample_data, message='happy')
+    assert daily_message is None
 
 def test_convert_time_format(sample_data):
     daily_message = get_daily_messages(sample_data)
@@ -113,6 +111,13 @@ def test_be_able_to_find_message_which_has_most_engagement(engagement_data):
     assert messages.iloc[2]['engagement'] == 8102
     #'twitter', 'facebook', 'pantip', 'youtube', 'website', 'instagram'
 
+def test_be_able_to_filter_message_by_keyword(engagement_data):
+    messages = get_most_engagement_messges(engagement_data, 3, 'น่ารัก')
+    assert messages.iloc[0]['engagement'] == 5306
+    assert messages.iloc[1]['engagement'] == 3397
+    assert len(messages) == 2
+    messages = get_most_engagement_messges(engagement_data, 3, 'test')
+    assert messages is None
 
 def test_convert_message_by_engagement_format(engagement_data):
     messages = get_most_engagement_messges(engagement_data, 3)

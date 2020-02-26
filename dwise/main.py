@@ -17,6 +17,7 @@ async def startup_event():
     data_file_path = None
     word_list_path = None
     hashtag_list_path = None
+
     if setting.mode == 'production':
         data_file_path = setting.ProdEnv.data_file
         word_list_path = setting.ProdEnv.word_file
@@ -60,8 +61,11 @@ async def filter_page(request: Request, keyword: str):
         days, number_of_message = utils.extract_daily_messages(daily_data)
     accounts = utils.get_most_message_accounts(data['data'])
     top_ten_accounts = utils.extract_most_accounts(accounts, 10)
-    messages = utils.get_most_engagement_messges(data['data'], 10)
-    top_ten_engagements = utils.extract_most_engagement_messages(messages)
+    
+    top_ten_engagements = []
+    messages = utils.get_most_engagement_messges(data['data'], 10, keyword)
+    if messages is not None:
+        top_ten_engagements = utils.extract_most_engagement_messages(messages)
 
     list_of_word = utils.filter_word_from_list(data['word'], keyword)
     word_count = utils.make_word_count(list_of_word)

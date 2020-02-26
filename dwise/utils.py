@@ -34,7 +34,12 @@ def extract_most_accounts(data, number_of_user=None):
         facebooks = data.where(data["channel"] == "facebook").dropna()['owner name'].head(number_of_user).to_list()
     return zip(youtubes, websites, twitters, pantips, instagrams, facebooks)
 
-def get_most_engagement_messges(data, number_of_message):
+def get_most_engagement_messges(data, number_of_message, filter_keyword=None):
+    if filter_keyword is not None:
+        filter_cond = data["message"].str.find(filter_keyword) != -1
+        data = data.where(filter_cond).dropna()
+        if len(data) == 0:
+            return None
     return data.sort_values('engagement', ascending=False).head(number_of_message)
 
 def extract_most_engagement_messages(data):
