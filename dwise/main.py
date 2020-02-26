@@ -36,8 +36,6 @@ async def startup_event():
         data['hashtag'] = pickle.load(hashtag_reader)
     with open(hashtag_list_path, 'rb') as word_reader:
         data['word'] = pickle.load(word_reader)
-    print(data['hashtag'])
-    print(data['word'])
 
 @app.get('/')
 async def home_page(request: Request):

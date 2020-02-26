@@ -43,8 +43,6 @@ def account_data():
 
 def test_be_able_to_find_account_who_has_most_messages(account_data):
     accounts = get_most_message_accounts(account_data)
-    # import pdb; pdb.set_trace()
-    print(accounts.iloc[0]['channel'])
     assert accounts.iloc[0]['channel'] == 'youtube'
     assert accounts.iloc[0]['owner name'] == 'youtube_4'
     assert accounts.iloc[1]['owner name'] == 'youtube_3'

@@ -15,6 +15,8 @@ aiofile = "*"
 mypy = "*"
 pytest = "*"
 black = "==19.10b0"
+coverage = "*"
+pytest-cov = "*"
 
 [requires]
 python_version = "3.7"
