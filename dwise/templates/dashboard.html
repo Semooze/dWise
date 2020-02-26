@@ -44,6 +44,21 @@
 
 <body>
     <h1 class="text-5xl text-center">dWise Dash board</h1>>
+    <div id="search-container" class="hidden pt-3 md:pt-0 md:block w-full md:w-1/2 max-w-md mx-auto md:ml-auto order-3">
+        <div class="relative max-w-3xl mx-auto px-6">
+            <div class="absolute h-10 mt-1 left-0 top-0 flex items-center pl-10">
+                <svg class="h-4 w-4 fill-current text-gray-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path
+                        d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z">
+                    </path>
+                </svg>
+            </div>
+            <form class="" action="/data">
+            <input id="search-toggle" type="search" placeholder="Enter search term ('/' to focus)"
+                class="block w-full bg-brand-white focus:outline-none focus:bg-white focus:shadow text-gray-700 font-bold rounded-lg pl-12 pr-4 py-3">
+            </form>
+        </div>
+    </div>
     <div id="dashboard">
         <div id="daily_message" class="bg-white border rounded shadow p-12 m-12"></div>
         <div id="top_account" class="bg-white border rounded shadow p-12 m-12">
@@ -53,9 +68,9 @@
             <table class="table-auto">
                 <thead>
                     <tr>
+                        <th class="px-4 py-2">Youtube</th>
+                        <th class="px-4 py-2">Website</th>
                         <th class="px-4 py-2">Twitter</th>
-                        <th class="px-4 py-2">Facebook</th>
-                        <th class="px-4 py-2">Pantip</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,9 +86,9 @@
             <table class="table-auto">
                 <thead>
                     <tr>
-                        <th class="px-4 py-2">Youtube</th>
-                        <th class="px-4 py-2">Website</th>
+                        <th class="px-4 py-2">Pantip</th>
                         <th class="px-4 py-2">Instagram</th>
+                        <th class="px-4 py-2">Facebook</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -107,7 +122,7 @@
                     {% endfor %}
                 </tbody>
             </table>
-            
+
         </div>
         <figure class="highcharts-figure">
             <div id="word_cloud" class="bg-white border rounded shadow p-12 m-12"></div>
@@ -152,12 +167,12 @@
             series: [{
                 type: 'wordcloud',
                 data: {{ word_cloud | safe }},
-                name: 'Occurrences'
+            name: 'Occurrences'
             }],
             title: {
-                text: 'WORD CLOUD',
-                align: 'left'
-            }
+            text: 'WORD CLOUD',
+            align: 'left'
+        }
         });
     </script>
     <script>
@@ -173,12 +188,12 @@
             series: [{
                 type: 'wordcloud',
                 data: {{ hashtag_cloud | safe }},
-                name: 'Occurrences'
+            name: 'Occurrences'
             }],
             title: {
-                text: 'HASHTAG CLOUD',
-                align: 'left'
-            }
+            text: 'HASHTAG CLOUD',
+            align: 'left'
+        }
         });
     </script>
 </body>
