@@ -15,6 +15,16 @@ def test_be_able_to_group_data_by_day(sample_data):
     assert daily_message['message'].loc['2019-01-02'] == 21
     assert daily_message['message'].loc['2019-01-03'] == 8
 
+def test_be_able_to_group_data_by_day_with_filter_message(sample_data):
+    daily_message = get_daily_messages(sample_data, message='ชม')
+    assert daily_message['message'].loc['2019-01-02'] == 1
+    assert daily_message['message'].loc['2019-01-03'] == 1
+    daily_message = get_daily_messages(sample_data, message='Happy')
+    assert daily_message['message'].loc['2019-01-01'] == 4
+
+def test_return_none_when_there_is_no_matched_message(sample_data):
+    actual = get_daily_messages(sample_data, message='happy')
+    assert actual is None
 
 def test_convert_time_format(sample_data):
     daily_message = get_daily_messages(sample_data)

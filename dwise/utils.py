@@ -2,7 +2,12 @@ import pandas as pd
 from pythainlp import word_tokenize
 from typing import List, Dict
 
-def get_daily_messages(data):
+def get_daily_messages(data, message=None):
+    if message:
+        filter_cond = data["message"].str.find(message) != -1
+        data = data.where(filter_cond).dropna()
+        if len(data) == 0:
+            return None
     data["time"]= pd.to_datetime(data["time"]) 
     return data.resample('D', on='time').count()
 
