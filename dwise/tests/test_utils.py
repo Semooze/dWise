@@ -141,6 +141,8 @@ def word_test_data():
     #     assert actual == expect
     #     assert True == True
 
+def test_be_able_to_filter_word_from_list():
+    assert ['testครับ', 'ครับ กินได้'] == filter_word_from_list(['testครับ', 'มาเที่ยว', 'ครับ กินได้', 'word'], 'ครับ')
 
 def test_be_able_to_make_word_count():
     actual = make_word_count(

@@ -62,8 +62,12 @@ async def filter_page(request: Request, keyword: str):
     top_ten_accounts = utils.extract_most_accounts(accounts, 10)
     messages = utils.get_most_engagement_messges(data['data'], 10)
     top_ten_engagements = utils.extract_most_engagement_messages(messages)
-    word_count = utils.make_word_count(data['word'])
+
+    list_of_word = utils.filter_word_from_list(data['word'], keyword)
+    word_count = utils.make_word_count(list_of_word)
     word_cloud = utils.make_word_cloud(word_count, sort='decend', limit=100)
-    hashtag_count = utils.make_hashtag_count(data['hashtag'])
+
+    list_of_hashtag = utils.filter_word_from_list(data['hashtag'], keyword)
+    hashtag_count = utils.make_hashtag_count(list_of_hashtag)
     hashtag_cloud = utils.make_word_cloud(hashtag_count, sort='decend', limit=100)
     return render_daily_messages(request, days, number_of_message, top_ten_accounts, top_ten_engagements, word_cloud, hashtag_cloud)

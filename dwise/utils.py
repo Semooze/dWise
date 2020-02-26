@@ -1,6 +1,6 @@
 import pandas as pd 
 from pythainlp import word_tokenize
-from typing import List, Dict
+from typing import List, Dict, Union
 
 def get_daily_messages(data, message=None):
     if message:
@@ -47,6 +47,9 @@ def extract_word_from_message(data) -> List[str]:
         striped_word = [ word.strip() for word in words if word.strip() != '']
         result.extend(striped_word)
     return result
+
+def filter_word_from_list(data: List, message) -> List[str]:
+    return [ word for word in data if word.find(message) != -1]
 
 def make_word_count(words: List) -> Dict:
     result: Dict = dict()
