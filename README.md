@@ -23,7 +23,7 @@ __Don't use computer that have memory less than 8GB.__
     ```shell
     $ docker-compose up
     ```
-5. Open a web browser and go to url __127.0.0.1:7000__
+5. Open a web browser and go to url __127.0.0.1:8000__
 
 ### Run test
 You can run test with the following command (There is no end-to-end test right now.)
