@@ -2,9 +2,9 @@ import pandas as pd
 from pythainlp import word_tokenize
 from typing import List, Dict, Union
 
-def get_daily_messages(data, message=None):
-    if message:
-        filter_cond = data["message"].str.find(message) != -1
+def get_daily_messages(data, filter_keyword=None):
+    if filter_keyword:
+        filter_cond = data["message"].str.find(filter_keyword) != -1
         data = data.where(filter_cond).dropna()
         if len(data) == 0:
             return None
@@ -14,7 +14,12 @@ def get_daily_messages(data, message=None):
 def extract_daily_messages(data):
     return data.index.strftime('%Y/%m/%d').to_list(), data['message'].to_list()
 
-def get_most_message_accounts(data):
+def get_most_message_accounts(data, filter_keyword=None):
+    if filter_keyword:
+        filter_cond = data["message"].str.find(filter_keyword) != -1
+        data = data.where(filter_cond).dropna()
+        if len(data) == 0:
+            return None
     return data.groupby(['channel', 'owner id', 'owner name'], as_index=False).count().sort_values(['channel', 'message'], ascending=False)
 
 def extract_most_accounts(data, number_of_user=None):

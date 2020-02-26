@@ -16,12 +16,12 @@ def test_be_able_to_group_data_by_day(sample_data):
     assert daily_message['message'].loc['2019-01-03'] == 8
 
 def test_be_able_to_group_data_by_day_with_filter_message(sample_data):
-    daily_message = get_daily_messages(sample_data, message='ชม')
+    daily_message = get_daily_messages(sample_data, filter_keyword='ชม')
     assert daily_message['message'].loc['2019-01-02'] == 1
     assert daily_message['message'].loc['2019-01-03'] == 1
-    daily_message = get_daily_messages(sample_data, message='Happy')
+    daily_message = get_daily_messages(sample_data, filter_keyword='Happy')
     assert daily_message['message'].loc['2019-01-01'] == 4
-    daily_message = get_daily_messages(sample_data, message='happy')
+    daily_message = get_daily_messages(sample_data, filter_keyword='happy')
     assert daily_message is None
 
 def test_convert_time_format(sample_data):
@@ -60,6 +60,17 @@ def test_be_able_to_find_account_who_has_most_messages(account_data):
     assert accounts.iloc[8]['channel'] == 'twitter'
     assert accounts.iloc[12]['channel'] == 'pantip'
     assert accounts.iloc[16]['channel'] == 'instagram'
+
+def test_be_able_to_filter_top_account_by_keyword(account_data):
+    accounts = get_most_message_accounts(account_data, filter_keyword="test")
+    assert accounts.iloc[0]['owner name'] == 'youtube_4'
+    assert accounts.iloc[1]['owner name'] == 'youtube_3'
+    assert accounts.iloc[2]['owner name'] == 'web_site_4'
+    assert accounts.iloc[3]['owner name'] == 'web_site_3'
+    accounts = get_most_message_accounts(account_data, filter_keyword="mano")
+    assert accounts is None
+
+
 
 #TODO
 # def test_be_able_to_find_account_who_has_most_messages_when_some_row_contain_empty_message(message_missing_data):
